@@ -1,6 +1,7 @@
 package dictionarymodel;
-	
+
 public class DictionarySingleEntry implements Comparable<DictionarySingleEntry> {
+
 	public int entryNumber;
 	public PartsOfSpeech partOfSpeech;
 	public String definition;

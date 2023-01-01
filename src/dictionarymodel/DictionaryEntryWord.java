@@ -1,14 +1,14 @@
 package dictionarymodel;
 
-
 public class DictionaryEntryWord implements Comparable<DictionaryEntryWord> {
+
 	private String word;
 
 	public DictionaryEntryWord(String word) {
 		this.word = word;
 	}
 
-	@Override 
+	@Override
 	public String toString() {
 		return word;
 
@@ -16,8 +16,9 @@ public class DictionaryEntryWord implements Comparable<DictionaryEntryWord> {
 
 	@Override
 	public int compareTo(DictionaryEntryWord b) {
-		if (word.length() == b.word.length())
+		if (word.length() == b.word.length()) {
 			return word.compareTo(b.word);
+		}
 		return b.word.length() - word.length();
 	}
 }

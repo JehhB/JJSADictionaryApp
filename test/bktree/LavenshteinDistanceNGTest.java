@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
  * @author eco
  */
 public class LavenshteinDistanceNGTest {
+
 	@Test
 	public void testGetDistance() {
 		LavenshteinDistance instance = new LavenshteinDistance("book");
@@ -22,5 +23,5 @@ public class LavenshteinDistanceNGTest {
 		assertEquals(instance.getDistance("bookie"), 2);
 		assertEquals(instance.getDistance("booc"), 1);
 	}
-	
+
 }

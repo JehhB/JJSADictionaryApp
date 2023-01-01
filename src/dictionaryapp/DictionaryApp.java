@@ -21,11 +21,15 @@ public class DictionaryApp {
 			var res = result.get(0);
 			res.entries.forEach(entry -> {
 				System.out.print(res.word + " ");
-				switch(entry.partOfSpeech) {
-					case NOUN -> System.out.print("n. ");
-					case VERB -> System.out.print("v. ");
-					case ADJECTIVE -> System.out.print("adj. ");
-					case ADVERB -> System.out.print("adv. ");
+				switch (entry.partOfSpeech) {
+					case NOUN ->
+						System.out.print("n. ");
+					case VERB ->
+						System.out.print("v. ");
+					case ADJECTIVE ->
+						System.out.print("adj. ");
+					case ADVERB ->
+						System.out.print("adv. ");
 				}
 
 				System.out.printf("%d %s%n", entry.entryNumber, entry.definition);

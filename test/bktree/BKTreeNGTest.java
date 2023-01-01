@@ -11,8 +11,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class BKTreeNGTest {
+
 	static BKTree<String> instance;
-	
+
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		instance = new BKTree("help")
@@ -24,7 +25,7 @@ public class BKTreeNGTest {
 			.insert("helper")
 			.insert("troop");
 	}
-	
+
 	@Test
 	public void testGetDepth() {
 		int depth = instance.getDepth();
@@ -45,7 +46,7 @@ public class BKTreeNGTest {
 
 	@Test
 	public void testSearch() {
-		List<String> result =  instance.search("oop", 2);
+		List<String> result = instance.search("oop", 2);
 		List<String> expected = Arrays.asList("loop", "troop");
 
 		assertEquals(result, expected);

@@ -68,7 +68,9 @@ public class BKTree<T> {
 	}
 
 	public int getLength() {
-		var wrapper = new Object(){ int length = 1; };
+		var wrapper = new Object() {
+			int length = 1;
+		};
 		children.forEach((dist, child) -> {
 			wrapper.length += child.getLength();
 		});
