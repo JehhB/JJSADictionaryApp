@@ -2,71 +2,42 @@ package bktree;
 
 import java.util.ArrayList;
 import java.util.List;
-import datastructures.BinarySearchTree;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class BKTree<T> implements Comparable<BKTree<T>> {
+public class BKTree<T> {
 
-	private T value;
-	private int distance;
-	private BinarySearchTree<BKTree<T>> children;
-
-	private class DistanceSearcher implements Comparable<BKTree<T>> {
-
-		int distance;
-
-		public DistanceSearcher(int distance) {
-			this.distance = distance;
-		}
-
-		@Override
-		public int compareTo(BKTree<T> b) {
-			return distance - b.distance;
-		}
-	}
-
-	private BKTree(T value, int distance) {
-		this.value = value;
-		this.distance = distance;
-		children = null;
-	}
+	private final T value;
+	private final Map<Integer, BKTree<T>> children;
 
 	public BKTree(T value) {
-		this(value, 0);
+		this.value = value;
+		children = new TreeMap();
 	}
 
 	public BKTree<T> insert(T value) {
 		int distance = LavenshteinDistance.getDistance(this.value, value);
 
-		if (children == null) {
-			children = new BinarySearchTree(new BKTree(value, distance));
-		} else {
-			BKTree<T> child = children.find(new DistanceSearcher(distance));
-
-			if (child == null) {
-				children.insert(new BKTree(value, distance));
-			} else {
-				child.insert(value);
-			}
-		}
+		children.compute(distance, (k, v)
+			-> v == null ? new BKTree(value) : v.insert(value)
+		);
 
 		return this;
 	}
 
 	public List<T> search(Object value, int tolerance) {
-		int distance = LavenshteinDistance.getDistance(this.value, value);
+		Integer distance = LavenshteinDistance.getDistance(this.value, value);
 
-		ArrayList<T> res = new ArrayList();
+		List<T> res = new ArrayList();
 		if (distance <= tolerance) {
 			res.add(this.value);
 		}
 
-		if (children != null) {
-			children.forEach((child) -> {
-				if (child.distance >= distance - tolerance && child.distance <= distance + tolerance) {
-					res.addAll(child.search(value, tolerance));
-				}
-			});
-		}
+		children.forEach((dist, child) -> {
+			if (dist >= distance - tolerance && dist <= distance + tolerance) {
+				res.addAll(child.search(value, tolerance));
+			}
+		});
 
 		res.sort(new LavenshteinDistanceComparator(value));
 		return res;
@@ -78,19 +49,29 @@ public class BKTree<T> implements Comparable<BKTree<T>> {
 	}
 
 	public int getDepth() {
-		if (children == null) return 1;
+		if (children == null) {
+			return 1;
+		}
 
-		var wrapper = new Object(){ int max = 0; };
-		children.forEach((child) -> {
+		var wrapper = new Object() {
+			int max = 0;
+		};
+
+		children.forEach((dist, child) -> {
 			int depth = child.getDepth();
-			if (depth > wrapper.max) wrapper.max = depth;
+			if (depth > wrapper.max) {
+				wrapper.max = depth;
+			}
 		});
 
 		return 1 + wrapper.max;
 	}
-	
-	@Override
-	public int compareTo(BKTree<T> b) {
-		return distance - b.distance;
+
+	public int getLength() {
+		var wrapper = new Object(){ int length = 1; };
+		children.forEach((dist, child) -> {
+			wrapper.length += child.getLength();
+		});
+		return wrapper.length;
 	}
 }

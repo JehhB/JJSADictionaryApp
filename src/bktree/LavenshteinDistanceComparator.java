@@ -2,7 +2,7 @@ package bktree;
 
 import java.util.Comparator;
 
-class LavenshteinDistanceComparator implements Comparator<Object> {
+public class LavenshteinDistanceComparator implements Comparator<Object> {
 
 	private final LavenshteinDistance ld;
 
