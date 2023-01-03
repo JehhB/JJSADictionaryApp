@@ -18,7 +18,7 @@ public class DictionaryModel {
 	}
 
 	public void init() {
-		try (InputStream in = getClass().getResourceAsStream("/dictionarymodel/dictionary.tsv")) {
+		try (InputStream in = getClass().getResourceAsStream("/res/dictionary.tsv")) {
 			var reader = new BufferedReader(new InputStreamReader(in));
 			String line = null;
 			DictionaryEntry prevEntry = null;
