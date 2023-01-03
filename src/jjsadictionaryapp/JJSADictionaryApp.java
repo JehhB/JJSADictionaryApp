@@ -1,9 +1,9 @@
-package dictionaryapp;
+package jjsadictionaryapp;
 
 import java.util.Scanner;
 import dictionarymodel.DictionaryModel;
 
-public class DictionaryApp {
+public class JJSADictionaryApp {
 
 	public static void main(String[] args) {
 		var in = new Scanner(System.in);
