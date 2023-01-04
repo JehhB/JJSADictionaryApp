@@ -4,11 +4,16 @@
  */
 package view;
 
+import javax.swing.ListCellRenderer;
+import dictionarymodel.DictionarySingleEntry;
+import java.awt.Component;
+import javax.swing.JList;
+
 /**
  *
  * @author eco
  */
-public class DictionarySingleEntryPanel extends javax.swing.JPanel {
+public class DictionarySingleEntryPanel extends javax.swing.JPanel implements ListCellRenderer<DictionarySingleEntry> {
 
 	/**
 	 * Creates new form DictionarySingleEntryPanel
@@ -38,6 +43,15 @@ public class DictionarySingleEntryPanel extends javax.swing.JPanel {
                 );
         }// </editor-fold>//GEN-END:initComponents
 
+	@Override
+	public Component getListCellRendererComponent(JList<? extends DictionarySingleEntry> jlist, DictionarySingleEntry e, int i, boolean bln, boolean bln1) {
+		setData(e);
+		return this;
+	}
+
+	public void setData(DictionarySingleEntry dictionarySingleEntry) {
+		// TODO implement setdata
+	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         // End of variables declaration//GEN-END:variables

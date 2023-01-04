@@ -4,6 +4,8 @@
  */
 package view;
 
+import dictionarymodel.DictionaryEntry;
+
 /**
  *
  * @author eco
@@ -37,6 +39,10 @@ public class GlossPanel extends javax.swing.JPanel {
                         .addGap(0, 300, Short.MAX_VALUE)
                 );
         }// </editor-fold>//GEN-END:initComponents
+
+	public void setData(int entrynumber, DictionaryEntry dictionaryEntry) {
+		// TODO implement set data
+	}
 
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
