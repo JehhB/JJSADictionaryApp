@@ -11,7 +11,6 @@ public class DictionaryModelNGTest {
 	@Test
 	public void testInit() {
 		DictionaryModel instance = new DictionaryModel();
-		instance.init();
 
 		var depth = instance.getModel().getDepth();
 		var length = instance.getModel().getLength();
