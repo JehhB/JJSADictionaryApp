@@ -9,7 +9,6 @@ public class JJSADictionaryApp {
 	public static void main(String[] args) {
 		var in = new Scanner(System.in);
 		var dictionary = new DictionaryModel();
-		dictionary.init();
 
 		System.out.print("Enter word to search: ");
 		String word = in.nextLine();
@@ -21,7 +20,7 @@ public class JJSADictionaryApp {
 			System.out.printf("No result found for \"%s\"%n", word);
 		} else if (searcher.getDistance(result.get(0).toString()) == 0) {
 			var res = result.get(0);
-			res.entries.forEach(entry -> {
+			res.entries.forEach((k, entry) -> {
 				System.out.print(res.word + " ");
 				switch (entry.partOfSpeech) {
 					case NOUN ->
