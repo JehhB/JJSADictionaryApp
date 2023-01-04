@@ -1,20 +1,27 @@
 package dictionarymodel;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.lang.Iterable;
+import java.util.TreeSet;
+import java.util.Comparator;
 
 public class DictionaryEntry {
 
 	public String word;
-	public List<DictionarySingleEntry> entries;
+	public Iterable<DictionarySingleEntry> entries;
 
 	public DictionaryEntry(String word) {
 		this.word = word;
-		this.entries = new ArrayList();
+		this.entries = new TreeSet(new Comparator<DictionarySingleEntry>() {
+			@Override
+			public int compare(DictionarySingleEntry t, DictionarySingleEntry t1) {
+				return t.entryNumber - t1.entryNumber;
+			}
+
+		});
 	}
 
 	public void addEntry(DictionarySingleEntry entry) {
-		entries.add(entry);
+		((TreeSet) entries).add(entry);
 	}
 
 	@Override

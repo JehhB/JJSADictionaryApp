@@ -3,7 +3,6 @@ package dictionarymodel;
 import bktree.BKTree;
 import bktree.LavenshteinDistance;
 import java.util.List;
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,25 +66,21 @@ public class DictionaryModel {
 		return model;
 	}
 
-	public List<DictionaryEntry> search(String word) {
+	public List<DictionaryEntry> search(LavenshteinDistance lavenshteinDistance) {
 		if (model == null) {
 			return null;
 		}
-		int tol = word.length() / 2;
+		int tol = lavenshteinDistance.toString().length() / 2;
 
-		var result = model.search(word, tol);
+		var result = model.search(lavenshteinDistance, tol);
 		if (result.isEmpty()) {
 			return null;
 		}
 
-		var head = result.get(0);
-		if (LavenshteinDistance.getDistance(word, head) == 0) {
-			ArrayList<DictionaryEntry> tmp;
-			tmp = new ArrayList();
-			tmp.add(head);
-			return tmp;
-		}
-
 		return result;
+	}
+
+	public List<DictionaryEntry> search(String word) {
+		return search(new LavenshteinDistance(word));
 	}
 }

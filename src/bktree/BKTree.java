@@ -25,22 +25,26 @@ public class BKTree<T> {
 		return this;
 	}
 
-	public List<T> search(Object value, int tolerance) {
-		Integer distance = LavenshteinDistance.getDistance(this.value, value);
+	public List<T> search(LavenshteinDistance lavenshteinDistance, int tolerance) {
+		Integer distance = lavenshteinDistance.getDistance(value.toString());
 
 		List<T> res = new ArrayList();
 		if (distance <= tolerance) {
-			res.add(this.value);
+			res.add(value);
 		}
 
 		children.forEach((dist, child) -> {
 			if (dist >= distance - tolerance && dist <= distance + tolerance) {
-				res.addAll(child.search(value, tolerance));
+				res.addAll(child.search(lavenshteinDistance, tolerance));
 			}
 		});
 
-		res.sort(new LavenshteinDistanceComparator(value));
+		res.sort(new LavenshteinDistanceComparator(lavenshteinDistance));
 		return res;
+	}
+
+	public List<T> search(Object value, int tolerance) {
+		return search(new LavenshteinDistance(value.toString()), tolerance);
 	}
 
 	public T find(Object value) {

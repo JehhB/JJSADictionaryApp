@@ -41,6 +41,11 @@ public class LavenshteinDistance {
 		return dp[len2 % 2][len1];
 	}
 
+	@Override
+	public String toString() {
+		return str;
+	}
+
 	public static int getDistance(Object a, Object b) {
 		return new LavenshteinDistance(a.toString()).getDistance(b.toString());
 	}

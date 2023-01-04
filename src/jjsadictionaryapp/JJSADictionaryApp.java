@@ -1,6 +1,7 @@
 package jjsadictionaryapp;
 
 import java.util.Scanner;
+import bktree.LavenshteinDistance;
 import dictionarymodel.DictionaryModel;
 
 public class JJSADictionaryApp {
@@ -12,12 +13,13 @@ public class JJSADictionaryApp {
 
 		System.out.print("Enter word to search: ");
 		String word = in.nextLine();
+		var searcher = new LavenshteinDistance(word);
 
-		var result = dictionary.search(word);
+		var result = dictionary.search(searcher);
 
 		if (result == null) {
 			System.out.printf("No result found for \"%s\"%n", word);
-		} else if (result.size() == 1) {
+		} else if (searcher.getDistance(result.get(0).toString()) == 0) {
 			var res = result.get(0);
 			res.entries.forEach(entry -> {
 				System.out.print(res.word + " ");
