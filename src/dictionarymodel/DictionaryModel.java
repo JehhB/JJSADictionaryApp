@@ -13,10 +13,6 @@ public class DictionaryModel {
 	private BKTree<DictionaryEntry> model;
 
 	public DictionaryModel() {
-		model = null;
-	}
-
-	public void init() {
 		try (InputStream in = getClass().getResourceAsStream("/res/dictionary.tsv")) {
 			var reader = new BufferedReader(new InputStreamReader(in));
 			String line = null;
