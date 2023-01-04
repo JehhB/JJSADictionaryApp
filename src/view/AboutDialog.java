@@ -37,7 +37,7 @@ public class AboutDialog extends javax.swing.JDialog {
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 300, Short.MAX_VALUE)
+                        .addGap(0, 416, Short.MAX_VALUE)
                 );
 
                 pack();

@@ -35,11 +35,11 @@ public class DictionarySingleEntryPanel extends javax.swing.JPanel implements Li
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+                        .addGap(0, 422, Short.MAX_VALUE)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 300, Short.MAX_VALUE)
+                        .addGap(0, 100, Short.MAX_VALUE)
                 );
         }// </editor-fold>//GEN-END:initComponents
 
