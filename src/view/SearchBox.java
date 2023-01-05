@@ -6,7 +6,9 @@ package view;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
+import java.util.function.Consumer;
 
 /**
  *
@@ -64,20 +66,20 @@ public class SearchBox extends javax.swing.JPanel {
                 searchButton = new javax.swing.JButton();
 
                 setBackground(new java.awt.Color(255, 255, 255));
+                setMaximumSize(new java.awt.Dimension(200, 24));
+                setMinimumSize(new java.awt.Dimension(200, 24));
 
                 searchText.setForeground(new java.awt.Color(49, 49, 49));
                 searchText.setText("Search");
                 searchText.setToolTipText("Search");
                 searchText.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
                 searchText.setMargin(new java.awt.Insets(16, 16, 16, 16));
+                searchText.setOpaque(true);
 
                 searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/search.png"))); // NOI18N
                 searchButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
                 searchButton.setBorderPainted(false);
                 searchButton.setContentAreaFilled(false);
-                searchButton.setMaximumSize(new java.awt.Dimension(12, 12));
-                searchButton.setMinimumSize(new java.awt.Dimension(12, 12));
-                searchButton.setPreferredSize(new java.awt.Dimension(12, 12));
                 searchButton.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 searchButtonActionPerformed(evt);
@@ -90,16 +92,16 @@ public class SearchBox extends javax.swing.JPanel {
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addComponent(searchText, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                                .addComponent(searchText, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchButton)
                                 .addGap(16, 16, 16))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(searchText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchButton)
                                 .addGap(6, 6, 6))
                 );
         }// </editor-fold>//GEN-END:initComponents
@@ -116,8 +118,14 @@ public class SearchBox extends javax.swing.JPanel {
 		return text;
 	}
 
-	public void addActionListener(java.awt.event.ActionListener actionListener) {
-		searchText.addActionListener(actionListener);
+	public void addSearchListener(Consumer<String> listener) {
+		searchText.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				listener.accept(text);
+			}
+			
+		});
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables

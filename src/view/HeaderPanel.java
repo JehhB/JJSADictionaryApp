@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+import java.util.function.Consumer;
+
 /**
  *
  * @author eco
@@ -26,21 +29,55 @@ public class HeaderPanel extends javax.swing.JPanel {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                setBackground(new java.awt.Color(39, 68, 114));
+                javax.swing.Box.Filler filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 32767));
+                logoButton = new javax.swing.JButton();
+                javax.swing.Box.Filler filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 32767));
+                nameButton = new javax.swing.JButton();
+                javax.swing.Box.Filler filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+                searchBox = new view.SearchBox();
+                javax.swing.Box.Filler filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 32767));
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-                this.setLayout(layout);
-                layout.setHorizontalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 768, Short.MAX_VALUE)
-                );
-                layout.setVerticalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 56, Short.MAX_VALUE)
-                );
+                setBackground(new java.awt.Color(39, 68, 114));
+                setMaximumSize(new java.awt.Dimension(65920, 56));
+                setMinimumSize(new java.awt.Dimension(389, 56));
+                setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+                add(filler1);
+
+                logoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/logo.png"))); // NOI18N
+                logoButton.setBorder(null);
+                logoButton.setContentAreaFilled(false);
+                add(logoButton);
+                add(filler2);
+
+                nameButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/name.png"))); // NOI18N
+                nameButton.setBorder(null);
+                nameButton.setContentAreaFilled(false);
+                add(nameButton);
+                add(filler3);
+
+                searchBox.setMaximumSize(new java.awt.Dimension(200, 24));
+                searchBox.setMinimumSize(new java.awt.Dimension(200, 24));
+                searchBox.setPreferredSize(new java.awt.Dimension(200, 24));
+                add(searchBox);
+                add(filler4);
         }// </editor-fold>//GEN-END:initComponents
 
+	public void addHomeListener(Runnable listener) {
+		ActionListener temp = (ae) -> {
+			listener.run();
+		};
+
+		logoButton.addActionListener(temp);
+		nameButton.addActionListener(temp);
+	}
+
+	public void addSearchListener(Consumer<String> listener) {
+		searchBox.addSearchListener(listener);
+	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JButton logoButton;
+        private javax.swing.JButton nameButton;
+        private view.SearchBox searchBox;
         // End of variables declaration//GEN-END:variables
 }

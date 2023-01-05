@@ -26,21 +26,55 @@ public class FooterPanel extends javax.swing.JPanel {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                setBackground(new java.awt.Color(39, 68, 114));
+                javax.swing.Box.Filler filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 32767));
+                javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                javax.swing.Box.Filler filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+                aboutButton = new javax.swing.JButton();
+                javax.swing.Box.Filler filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(16, 0), new java.awt.Dimension(16, 0), new java.awt.Dimension(16, 32767));
+                termsAndConditionButton = new javax.swing.JButton();
+                javax.swing.Box.Filler filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 0), new java.awt.Dimension(24, 32767));
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-                this.setLayout(layout);
-                layout.setHorizontalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 768, Short.MAX_VALUE)
-                );
-                layout.setVerticalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 56, Short.MAX_VALUE)
-                );
+                setBackground(new java.awt.Color(39, 68, 114));
+                setMaximumSize(new java.awt.Dimension(32767, 56));
+                setMinimumSize(new java.awt.Dimension(0, 56));
+                setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+                add(filler1);
+
+                jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icon.png"))); // NOI18N
+                add(jLabel1);
+                add(filler2);
+
+                aboutButton.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+                aboutButton.setForeground(new java.awt.Color(255, 255, 255));
+                aboutButton.setText("About");
+                aboutButton.setBorder(null);
+                aboutButton.setContentAreaFilled(false);
+                add(aboutButton);
+                add(filler3);
+
+                termsAndConditionButton.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+                termsAndConditionButton.setForeground(new java.awt.Color(255, 255, 255));
+                termsAndConditionButton.setText("Terms and Conditions");
+                termsAndConditionButton.setBorder(null);
+                termsAndConditionButton.setContentAreaFilled(false);
+                add(termsAndConditionButton);
+                add(filler4);
         }// </editor-fold>//GEN-END:initComponents
 
+	public void addAboutListener(Runnable listener) {
+		aboutButton.addActionListener((ae) -> {
+			listener.run();
+		});
+	}
+
+	public void addTermsAndConditionListener(Runnable listener) {
+		aboutButton.addActionListener((ae) -> {
+			listener.run();
+		});
+	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JButton aboutButton;
+        private javax.swing.JButton termsAndConditionButton;
         // End of variables declaration//GEN-END:variables
 }
