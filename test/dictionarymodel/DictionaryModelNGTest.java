@@ -15,7 +15,9 @@ public class DictionaryModelNGTest {
 		var depth = instance.getModel().getDepth();
 		var length = instance.getModel().getLength();
 
+		System.out.println(depth + " " + length);
+
 		assertTrue(depth > 0);
-		assertEquals(length, 78229);
+		assertEquals(length, instance.getSize());
 	}
 }

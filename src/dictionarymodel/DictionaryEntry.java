@@ -3,7 +3,7 @@ package dictionarymodel;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class DictionaryEntry {
+public class DictionaryEntry implements Comparable<String> {
 
 	public String word;
 	public Map<Integer, DictionarySingleEntry> entries;
@@ -20,6 +20,11 @@ public class DictionaryEntry {
 	@Override
 	public String toString() {
 		return word;
+	}
+
+	@Override
+	public int compareTo(String t) {
+		return word.compareTo(t);
 	}
 
 }
