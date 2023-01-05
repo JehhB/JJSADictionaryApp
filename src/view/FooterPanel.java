@@ -68,7 +68,7 @@ public class FooterPanel extends javax.swing.JPanel {
 	}
 
 	public void addTermsAndConditionListener(Runnable listener) {
-		aboutButton.addActionListener((ae) -> {
+		termsAndConditionButton.addActionListener((ae) -> {
 			listener.run();
 		});
 	}

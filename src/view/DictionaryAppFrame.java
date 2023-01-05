@@ -32,7 +32,6 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
 			new TermsAndConditionDialog(this, true)
 				.setVisible(true);
 		});
-
 	}
 
 

@@ -7,10 +7,13 @@ public class DictionaryEntry implements Comparable<String> {
 
 	public String word;
 	public Map<Integer, DictionarySingleEntry> entries;
+	public DictionaryEntry next, prev;
 
 	public DictionaryEntry(String word) {
 		this.word = word;
 		this.entries = new TreeMap();
+		next = null;
+		prev = null;
 	}
 
 	public void addEntry(DictionarySingleEntry entry) {

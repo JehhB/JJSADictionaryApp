@@ -63,6 +63,13 @@ public class DictionaryModel {
 			return;
 		}
 
+		var prevEntry = elements.get(0);
+		for (int i = 1; i < elements.size(); ++i) {
+			var entry = elements.get(i);
+			entry.prev = prevEntry;
+			prevEntry.next = entry;
+		}
+
 		var temp = new ArrayList<DictionaryEntry>(elements);
 		temp.sort(new Comparator<>() {
 			public int compare(DictionaryEntry t, DictionaryEntry t1) {
