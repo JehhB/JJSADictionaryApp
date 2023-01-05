@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.CardLayout;
+import dictionarymodel.DictionaryModel;
 
 /**
  *
@@ -12,17 +13,28 @@ import java.awt.CardLayout;
  */
 public class DictionaryAppFrame extends javax.swing.JFrame {
 
-	private CardLayout cards;
 
 	/**
 	 * Creates new form DictionaryAppFrame
 	 */
-
 	public DictionaryAppFrame() {
 		initComponents();
 
-		cards = (CardLayout) mainPanel.getLayout();
+		CardLayout cards = (CardLayout) mainPanel.getLayout();
+		DictionaryModel dictionary = new DictionaryModel();
+		
+
+		footerPanel.addAboutListener(() -> {
+			new AboutDialog(this, true)
+				.setVisible(true);
+		});
+		footerPanel.addTermsAndConditionListener(() -> {
+			new TermsAndConditionDialog(this, true)
+				.setVisible(true);
+		});
+
 	}
+
 
 	/**
 	 * This method is called from within the constructor to initialize the
@@ -41,7 +53,10 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
                 mainPanel = new javax.swing.JPanel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setTitle("JJSA-Webster Dictionary");
                 setMinimumSize(new java.awt.Dimension(640, 112));
+
+                headerPanel.setPreferredSize(new java.awt.Dimension(536, 56));
                 getContentPane().add(headerPanel, java.awt.BorderLayout.PAGE_START);
 
                 footerPanel.setPreferredSize(new java.awt.Dimension(269, 56));
