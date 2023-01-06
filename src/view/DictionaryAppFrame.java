@@ -43,7 +43,6 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
-                java.awt.GridBagConstraints gridBagConstraints;
 
                 headerPanel = new view.HeaderPanel();
                 footerPanel = new view.FooterPanel();
@@ -53,7 +52,7 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("JJSA-Webster Dictionary");
-                setMinimumSize(new java.awt.Dimension(640, 112));
+                setMinimumSize(new java.awt.Dimension(672, 112));
 
                 headerPanel.setPreferredSize(new java.awt.Dimension(536, 56));
                 getContentPane().add(headerPanel, java.awt.BorderLayout.PAGE_START);

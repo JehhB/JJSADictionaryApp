@@ -4,7 +4,7 @@ import bktree.BKTree;
 import bktree.LavenshteinDistance;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.TreeMap;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,7 +17,7 @@ public class DictionaryModel {
 	private List<DictionaryEntry> elements;
 
 	public DictionaryModel() {
-		elements = new ArrayList<>();
+		var map = new TreeMap<String, DictionaryEntry>();
 
 		try (InputStream in = getClass().getResourceAsStream("/res/dictionary.tsv")) {
 			var reader = new BufferedReader(new InputStreamReader(in));
@@ -45,29 +45,28 @@ public class DictionaryModel {
 				String definition = values[3];
 
 				DictionarySingleEntry entry = new DictionarySingleEntry(entryNumber, partOfSpeech, definition);
-
-				int position = Collections.binarySearch(elements, word);
-				if (position < 0) {
-					var temp = new DictionaryEntry(word);
-					temp.addEntry(entry);
-					elements.add(-position - 1, temp);
-				} else {
-					elements.get(position).addEntry(entry);
-				}
+				map.compute(word, (key, value) -> {
+					value = value == null ? new DictionaryEntry(word) : value;
+					value.addEntry(entry);
+					return value;
+				});
 			}
 		} catch (IOException x) {
 			System.err.println(x);
 		}
 
-		if (elements.size() <= 0) {
+		if (map.size() <= 0) {
 			return;
 		}
 
+		elements = new ArrayList<DictionaryEntry>(map.values());
 		var prevEntry = elements.get(0);
 		for (int i = 1; i < elements.size(); ++i) {
 			var entry = elements.get(i);
 			entry.prev = prevEntry;
 			prevEntry.next = entry;
+
+			prevEntry = entry;
 		}
 
 		var temp = new ArrayList<DictionaryEntry>(elements);
@@ -88,6 +87,10 @@ public class DictionaryModel {
 
 	public DictionaryEntry getElementAt(int i) {
 		return elements.get(i);
+	}
+
+	public List<DictionaryEntry> getElements() {
+		return elements;
 	}
 
 	public BKTree<DictionaryEntry> getModel() {
