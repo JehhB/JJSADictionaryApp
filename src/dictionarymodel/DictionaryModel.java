@@ -104,10 +104,6 @@ public class DictionaryModel {
 		int tol = lavenshteinDistance.toString().length() / 2;
 
 		var result = model.search(lavenshteinDistance, tol);
-		if (result.isEmpty()) {
-			return null;
-		}
-
 		return result;
 	}
 

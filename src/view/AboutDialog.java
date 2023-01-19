@@ -17,7 +17,7 @@ public class AboutDialog extends javax.swing.JDialog {
 		super(parent, modal);
 		initComponents();
 	}
-
+        
 	/**
 	 * This method is called from within the constructor to initialize the
 	 * form. WARNING: Do NOT modify this code. The content of this method is
@@ -27,17 +27,98 @@ public class AboutDialog extends javax.swing.JDialog {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                jScrollPane1 = new javax.swing.JScrollPane();
+                jPanel1 = new javax.swing.JPanel();
+                jTextArea1 = new javax.swing.JTextArea();
+                jTextArea3 = new javax.swing.JTextArea();
+                jTextArea4 = new javax.swing.JTextArea();
+                jTextArea5 = new javax.swing.JTextArea();
+                jLabel2 = new javax.swing.JLabel();
+
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+                setPreferredSize(new java.awt.Dimension(400, 416));
+                setResizable(false);
+
+                jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+                jTextArea1.setEditable(false);
+                jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
+                jTextArea1.setColumns(20);
+                jTextArea1.setLineWrap(true);
+                jTextArea1.setText("JJSA-Webster Dictionary is made in partial fulfillment of a \nCS215 project at Cagayan State University - Carig Campus");
+                jTextArea1.setWrapStyleWord(true);
+                jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+                jTextArea3.setEditable(false);
+                jTextArea3.setBackground(new java.awt.Color(255, 255, 255));
+                jTextArea3.setColumns(20);
+                jTextArea3.setLineWrap(true);
+                jTextArea3.setText("Words and Definitions are provided by WordNet®  lexical \ndatabase. Use of said database is regulated under the\nWordNet3.0 license. More Information can be read at https://\nwordnet.princeton.edu");
+                jTextArea3.setWrapStyleWord(true);
+                jTextArea3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+                jTextArea4.setEditable(false);
+                jTextArea4.setBackground(new java.awt.Color(255, 255, 255));
+                jTextArea4.setColumns(20);
+                jTextArea4.setText("The JJSA team consist of the following members:");
+                jTextArea4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+                jTextArea5.setEditable(false);
+                jTextArea5.setBackground(new java.awt.Color(255, 255, 255));
+                jTextArea5.setColumns(20);
+                jTextArea5.setRows(5);
+                jTextArea5.setText("Kalvin Karl Nonato (Adviser)\nJerico Wayne Bayod\nJohn Lloyd Capili\nStephen Castaneda\nAnnetonete Peralta");
+                jTextArea5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+                jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/logoBig.png"))); // NOI18N
+                jLabel2.setDoubleBuffered(true);
+                jLabel2.setRequestFocusEnabled(false);
+
+                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                jPanel1.setLayout(jPanel1Layout);
+                jPanel1Layout.setHorizontalGroup(
+                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(27, 27, 27)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jTextArea3)
+                                                        .addComponent(jTextArea4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextArea5, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextArea1)))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(136, 136, 136)
+                                                .addComponent(jLabel2)))
+                                .addGap(24, 24, 24))
+                );
+                jPanel1Layout.setVerticalGroup(
+                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel2)
+                                .addGap(43, 43, 43)
+                                .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(jTextArea3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(jTextArea4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(jTextArea5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+
+                jScrollPane1.setViewportView(jPanel1);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 416, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                 );
 
                 pack();
@@ -86,5 +167,12 @@ public class AboutDialog extends javax.swing.JDialog {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JLabel jLabel2;
+        private javax.swing.JPanel jPanel1;
+        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JTextArea jTextArea1;
+        private javax.swing.JTextArea jTextArea3;
+        private javax.swing.JTextArea jTextArea4;
+        private javax.swing.JTextArea jTextArea5;
         // End of variables declaration//GEN-END:variables
 }

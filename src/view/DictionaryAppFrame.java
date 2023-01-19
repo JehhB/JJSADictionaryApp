@@ -5,14 +5,14 @@
 package view;
 
 import java.awt.CardLayout;
-import dictionarymodel.DictionaryModel;
+import dictionarymodel.*;
 
 /**
  *
  * @author eco
  */
 public class DictionaryAppFrame extends javax.swing.JFrame {
-
+	private final DictionaryModel dictionary;
 
 	/**
 	 * Creates new form DictionaryAppFrame
@@ -20,9 +20,10 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
 	public DictionaryAppFrame() {
 		initComponents();
 
-		CardLayout cards = (CardLayout) mainPanel.getLayout();
-		DictionaryModel dictionary = new DictionaryModel();
+		dictionary = new DictionaryModel();
 		
+		headerPanel.addGotoHomeListener(this::gotoHome);
+		headerPanel.addSearchListener(this::search);
 
 		footerPanel.addAboutListener(() -> {
 			new AboutDialog(this, true)
@@ -32,8 +33,17 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
 			new TermsAndConditionDialog(this, true)
 				.setVisible(true);
 		});
-	}
 
+		mainPanel.setModel(dictionary);
+		mainPanel.addGotoDefinitionListener(this::gotoDefinition);
+
+		searchPanel.addGotoDefintionListener(this::gotoDefinition);
+
+		definitionPanel.addGotoHomeListener(this::gotoHome);
+		definitionPanel.addGotoDefinitionListener(this::gotoDefinition);
+
+		switchCard("main");
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the
@@ -48,7 +58,10 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
                 footerPanel = new view.FooterPanel();
                 javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
                 javax.swing.JPanel panel = new javax.swing.JPanel();
-                mainPanel = new javax.swing.JPanel();
+                contentPanel = new javax.swing.JPanel();
+                mainPanel = new view.MainPanel();
+                definitionPanel = new view.DefinitionPanel();
+                searchPanel = new view.SearchPanel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("JJSA-Webster Dictionary");
@@ -63,14 +76,20 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
                 scrollPane.setBackground(new java.awt.Color(255, 255, 255));
                 scrollPane.setBorder(null);
                 scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                scrollPane.setToolTipText("");
 
                 panel.setBackground(new java.awt.Color(255, 255, 255));
 
-                mainPanel.setBackground(new java.awt.Color(255, 0, 0));
-                mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-                mainPanel.setMaximumSize(new java.awt.Dimension(640, 32767));
-                mainPanel.setMinimumSize(new java.awt.Dimension(640, 0));
-                mainPanel.setLayout(new java.awt.CardLayout());
+                contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+                contentPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+                contentPanel.setMaximumSize(new java.awt.Dimension(640, 32767));
+                contentPanel.setMinimumSize(new java.awt.Dimension(640, 0));
+                contentPanel.setLayout(new java.awt.CardLayout());
+                contentPanel.add(mainPanel, "main");
+                contentPanel.add(definitionPanel, "definition");
+
+                searchPanel.setBackground(new java.awt.Color(255, 255, 255));
+                contentPanel.add(searchPanel, "search");
 
                 javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
                 panel.setLayout(panelLayout);
@@ -78,14 +97,14 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
                         panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                 );
                 panelLayout.setVerticalGroup(
                         panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(0, 0, 0)
-                                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                 );
 
@@ -131,10 +150,35 @@ public class DictionaryAppFrame extends javax.swing.JFrame {
 		});
 	}
 
+	private void switchCard(String name) {
+		var cards = (CardLayout) contentPanel.getLayout();
+		cards.show(contentPanel,name);
+	}
+
+	private void gotoDefinition(DictionaryEntry entry) {
+		definitionPanel.setData(entry);
+		switchCard("definition");
+		searchPanel.clear();
+	}
+
+	private void gotoHome() {
+		mainPanel.refresh();
+		switchCard("main");
+		searchPanel.clear();
+	}
+
+	private void search(String query) {
+		var result = dictionary.search(query);
+		searchPanel.setData(query, result);
+		switchCard("search");
+	}
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JPanel contentPanel;
+        private view.DefinitionPanel definitionPanel;
         private view.FooterPanel footerPanel;
         private view.HeaderPanel headerPanel;
-        private javax.swing.JPanel mainPanel;
+        private view.MainPanel mainPanel;
+        private view.SearchPanel searchPanel;
         // End of variables declaration//GEN-END:variables
-
 }

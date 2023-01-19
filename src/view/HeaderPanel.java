@@ -62,7 +62,7 @@ public class HeaderPanel extends javax.swing.JPanel {
                 add(filler4);
         }// </editor-fold>//GEN-END:initComponents
 
-	public void addHomeListener(Runnable listener) {
+	public void addGotoHomeListener(Runnable listener) {
 		ActionListener temp = (ae) -> {
 			listener.run();
 		};

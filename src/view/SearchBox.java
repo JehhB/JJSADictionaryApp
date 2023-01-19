@@ -122,9 +122,12 @@ public class SearchBox extends javax.swing.JPanel {
 		searchText.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				listener.accept(text);
+				text = searchText.getText();
+				if (!text.isEmpty()) {
+					listener.accept(text);
+				}
 			}
-			
+
 		});
 	}
 

@@ -31,15 +31,53 @@ public class DictionarySingleEntryPanel extends javax.swing.JPanel implements Li
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                entryNumberLabel = new javax.swing.JLabel();
+                partsOfSpeechLabel = new javax.swing.JLabel();
+                definitionText = new javax.swing.JTextArea();
+
+                setBackground(new java.awt.Color(255, 255, 255));
+
+                entryNumberLabel.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+                entryNumberLabel.setText("1.");
+                entryNumberLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+                partsOfSpeechLabel.setFont(new java.awt.Font("sansserif", 2, 16)); // NOI18N
+                partsOfSpeechLabel.setForeground(new java.awt.Color(65, 114, 159));
+                partsOfSpeechLabel.setText("(adv.)");
+
+                definitionText.setEditable(false);
+                definitionText.setBackground(new java.awt.Color(255, 255, 255));
+                definitionText.setColumns(50);
+                definitionText.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+                definitionText.setLineWrap(true);
+                definitionText.setRows(5);
+                definitionText.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi sem, pulvinar eu nibh sit amet, placerat porta velit. Integer malesuada turpis nec ante convallis pulvinar. Vestibulum vel elementum nulla.");
+                definitionText.setWrapStyleWord(true);
+                definitionText.setBorder(null);
+                definitionText.setMaximumSize(new java.awt.Dimension(400, 2147483647));
+                definitionText.setMinimumSize(new java.awt.Dimension(400, 21));
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 422, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(entryNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(partsOfSpeechLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(definitionText, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(entryNumberLabel)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(partsOfSpeechLabel)
+                                                .addComponent(definitionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, 0))
                 );
         }// </editor-fold>//GEN-END:initComponents
 
@@ -49,10 +87,24 @@ public class DictionarySingleEntryPanel extends javax.swing.JPanel implements Li
 		return this;
 	}
 
-	public void setData(DictionarySingleEntry dictionarySingleEntry) {
-		// TODO implement setdata
+	public void setData(DictionarySingleEntry entry) {
+		entryNumberLabel.setText(entry.entryNumber + ".");
+		definitionText.setText(entry.definition);
+		definitionText.setRows((entry.definition.length() + 25) / 50);
+
+		String pos = "";
+		switch(entry.partOfSpeech) {
+			case NOUN -> pos = "(n.)";
+			case VERB -> pos = "(v.)";
+			case ADJECTIVE -> pos = "(adj.)";
+			case ADVERB -> pos = "(adv.)";
+		}
+		partsOfSpeechLabel.setText(pos);
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JTextArea definitionText;
+        private javax.swing.JLabel entryNumberLabel;
+        private javax.swing.JLabel partsOfSpeechLabel;
         // End of variables declaration//GEN-END:variables
 }

@@ -4,13 +4,17 @@
  */
 package view;
 
-import dictionarymodel.DictionaryEntry;
+import dictionarymodel.*;
+import java.awt.Component;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import view.util.Pair;
 
 /**
  *
  * @author eco
  */
-public class GlossPanel extends javax.swing.JPanel {
+public class GlossPanel extends javax.swing.JPanel implements ListCellRenderer<Pair<DictionaryEntry, DictionarySingleEntry>> {
 
 	/**
 	 * Creates new form GlossPanel
@@ -28,23 +32,90 @@ public class GlossPanel extends javax.swing.JPanel {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                wordLabel = new javax.swing.JLabel();
+                partsOfSpeechLabel = new javax.swing.JLabel();
+                definitionText = new javax.swing.JTextArea();
+
+                setBackground(new java.awt.Color(255, 255, 255));
+
+                wordLabel.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
+                wordLabel.setText("Lorem");
+
+                partsOfSpeechLabel.setFont(new java.awt.Font("sansserif", 2, 16)); // NOI18N
+                partsOfSpeechLabel.setForeground(new java.awt.Color(49, 49, 49));
+                partsOfSpeechLabel.setText("(adj.)");
+
+                definitionText.setEditable(false);
+                definitionText.setColumns(50);
+                definitionText.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+                definitionText.setForeground(new java.awt.Color(49, 49, 49));
+                definitionText.setLineWrap(true);
+                definitionText.setRows(3);
+                definitionText.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi sem, pulvinar eu nibh sit amet, placerat porta velit. Integer malesuada turpis nec ante convallis pulvinar. Vestibulum vel elementum nulla.");
+                definitionText.setWrapStyleWord(true);
+                definitionText.setAutoscrolls(false);
+                definitionText.setBorder(null);
+                definitionText.setMaximumSize(new java.awt.Dimension(640, 2147483647));
+                definitionText.setMinimumSize(new java.awt.Dimension(400, 21));
+                definitionText.setOpaque(false);
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 351, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(wordLabel)
+                                                .addGap(8, 8, 8)
+                                                .addComponent(partsOfSpeechLabel)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(0, 0, 0)
+                                                .addComponent(definitionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, 0))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 70, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(wordLabel)
+                                        .addComponent(partsOfSpeechLabel))
+                                .addGap(8, 8, 8)
+                                .addComponent(definitionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16))
                 );
         }// </editor-fold>//GEN-END:initComponents
 
-	public void setData(int entrynumber, DictionaryEntry dictionaryEntry) {
-		// TODO implement set data
+	public void setData(DictionaryEntry dictionaryEntry, DictionarySingleEntry singleEntry) {
+		wordLabel.setText(dictionaryEntry.word);
+
+		String pos = "";
+		switch(singleEntry.partOfSpeech) {
+			case NOUN -> pos = "(n.)";
+			case VERB -> pos = "(v.)";
+			case ADJECTIVE -> pos = "(adj.)";
+			case ADVERB -> pos = "(adv.)";
+		}
+		partsOfSpeechLabel.setText(pos);
+		definitionText.setText(singleEntry.definition);
 	}
 
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JTextArea definitionText;
+        private javax.swing.JLabel partsOfSpeechLabel;
+        private javax.swing.JLabel wordLabel;
         // End of variables declaration//GEN-END:variables
+
+	@Override
+	public Component getListCellRendererComponent(
+		JList<? extends Pair<DictionaryEntry, DictionarySingleEntry>> jlist,
+		Pair<DictionaryEntry, DictionarySingleEntry> e,
+		int i, boolean bln, boolean bln1) {
+
+		this.setData(e.fst, e.snd);
+		return this;
+	}
 }
